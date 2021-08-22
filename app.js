@@ -10,7 +10,7 @@ BUTTON.onclick = () => {
 
 INPUT.addEventListener('change', function () {
     FILE = this.files[0];
-    DRAG_AREA.classList.remove('active');
+    DRAG_AREA.classList.add('active');
     DisplayImage();
 });
 
@@ -44,6 +44,6 @@ function DisplayImage() {
         FILE_READER.readAsDataURL(FILE);
     } else {
         alert("This File is on at Image");
-        DRAG_AREA.classList.remove('active');
+        DRAG_AREA.classList.add('active');
     }
 }
