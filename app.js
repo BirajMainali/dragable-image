@@ -2,6 +2,7 @@ const DRAG_AREA = document.querySelector('.drag--area');
 const headerElm = document.querySelector('.header');
 const BUTTON = document.querySelector('.button');
 const INPUT = document.querySelector('input');
+const WARNING_ELM = document.querySelector('.not--supported--image');
 let FILE;
 
 BUTTON.onclick = () => {
@@ -31,19 +32,19 @@ DRAG_AREA.addEventListener('drop', (event) => {
     DisplayImage();
 });
 
-function DisplayImage() {
+const DisplayImage = () => {
     const FILE_TYPE = FILE.type;
     const VALID_EXTENSIONS = ['image/jpeg', 'image/jpg', 'image/png'];
     if (VALID_EXTENSIONS.includes(FILE_TYPE)) {
         const FILE_READER = new FileReader();
         FILE_READER.onload = () => {
             const FILE_URL = FILE_READER.result;
-            console.log(FILE_URL);
+            WARNING_ELM.textContent = "";
             DRAG_AREA.innerHTML = `<img src="${FILE_URL}" alt="">`;
         }
         FILE_READER.readAsDataURL(FILE);
     } else {
-        alert("This File is on at Image");
-        DRAG_AREA.classList.add('active');
+        WARNING_ELM.textContent = `Type: ${FILE_TYPE} is not supported for now`;
+        DRAG_AREA.classList.remove('active');
     }
 }
